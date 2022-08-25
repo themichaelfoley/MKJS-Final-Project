@@ -107,4 +107,18 @@ if st.button("Register Artwork"):
 
 st.markdown("---")
 
+tokenID= st.text_input('Enter Token ID')
 
+if st.button("get image"):
+
+    uri=contract.functions.imageUri(int(tokenID)).call()
+    uri = f"https://ipfs.io/ipfs/{uri}"
+    st.write(f"image is located at {uri}")
+   
+    st.image(uri)
+    #st.sidebar.write(f'Image: {st.image(uri)}')
+
+
+#st.sidebar.markdown('## Display NFT ##')
+#selected_token=st.sidebar.selectbox('Select an NFT', range(totalSupply))
+#st.sidebar.write(f'Image: {st.image(tx_hash.functions.artwork_uri(selected_token).call())}')
