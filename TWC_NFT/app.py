@@ -4,10 +4,11 @@ from web3 import Web3
 from pathlib import Path
 from dotenv import load_dotenv
 import streamlit as st
-
 from pinata import pin_file_to_ipfs, pin_json_to_ipfs, convert_data_to_json
 
 load_dotenv()
+
+st.set_page_config(page_title="NFT Club Registry", page_icon="🍾")
 
 # Define and connect a new Web3 provider
 w3 = Web3(Web3.HTTPProvider(os.getenv("WEB3_PROVIDER_URI")))
@@ -66,12 +67,26 @@ def pin_appraisal_report(report_content):
     report_ipfs_hash = pin_json_to_ipfs(json_report)
     return report_ipfs_hash
 
-
 st.title("Three W's Club NFT Registry")
 st.write("Choose an account to get started")
 accounts = w3.eth.accounts
 address = st.selectbox("Select Account", options=accounts)
 st.markdown("---")
+def add_bg_from_url():
+    st.markdown(
+         f"""
+         <style>
+         .stApp {{
+             background-image: url("https://i.pinimg.com/originals/46/fb/56/46fb5699a79f5abe7587a76b6f0af2ab.jpg");
+             background-attachment: fixed;
+             background-size: fit
+         }}
+         </style>
+         """,
+         unsafe_allow_html=True
+     )
+
+add_bg_from_url() 
 
 ################################################################################
 # Register New Artwork
@@ -116,6 +131,9 @@ if st.button("get image"):
     st.write(f"image is located at {uri}")
    
     st.image(uri)
+
+    st.markdown("## NFT Bidding Application........Coming Soon 🏃")
+
     #st.sidebar.write(f'Image: {st.image(uri)}')
 
 
